@@ -41,13 +41,6 @@
 
     <script>
         $(function () {
-            $("#java-div").click(function () {
-                window.location = "serverless-java.html";
-            });
-            $("#ymal-div").click(function () {
-                window.location = "ymal.html";
-            });
-
             // anti-spam precautions
             var gitSite = "https://github.com/";
             var linkedSite = "https://www.linkedin.com/in/";
@@ -58,7 +51,7 @@
             $("#git-link").attr("href", gitURL);
             var ownedBy = "yalniF eeD".split("").reverse().join("");
             $("#foot-name").text(ownedBy);
-            $(document).attr("title", ownedBy + " · Projects");
+            $(document).attr("title", ownedBy + " · YeoDevs");
         });
     </script>
 
@@ -76,10 +69,10 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link mono active" href="#">Projects</a>
+                    <a class="nav-link mono" href="projects.html">Projects</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mono" href="yeodevs.html">Dev Wellbeing</a>
+                    <a class="nav-link mono active" href="#">Dev Wellbeing</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link mono" href="cv-resume.html">CV|Resume</a>
@@ -121,22 +114,24 @@
     <main role="main">
 
         <!-- Main jumbotron for a primary marketing message or call to action -->
-        <div class="jumbotron jtpr">
+        <div class="jumbotron jtyd">
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">
-                        <img class="img-rounded img-fluid" src="images/logos.jpeg" alt="Programming Language Logos"
-                            title="Lovely Language Logos" />
+                        <img class="img-rounded img-fluid" src="images/IMG_05.png" alt="Stressed Programmer"
+                            title="Programming Stress" />
                     </div>
                     <div class="col-md-9">
-                        <h1 class="display-3 mb-0 mono">Projects</h1>
-                        <p class="lead mb-0">A few items of work from the last year.
+                        <h1 class="display-3 mb-0 mono">YeoDevs</h1>
+                        <p class="lead mb-0">Yeo, Devs! Look After Yourselves!
                         </p>
                         <hr class="my-2">
-                        <p>From straight coursework to hobby stuff...
-                        <p class="mb-0"><a class="btn btnp bkg-dark pr-col btn-lg mono linked-link"
-                                href="" role="button"
-                                title="Always Happy to Say Hi!">Get
+                        <p>Despite the varieties of developer, we've much in common. Our work can be sedentary, often
+                            for
+                            long hours without break, requiring attention on detail and method all while under
+                            time-limited pressure. From time to time we all need a reminder to make some self-time.
+                        <p class="mb-0"><a class="btn btny bkg-dark pr-col btn-lg mono linked-link" href=""
+                                role="button" title="Always Happy to Say Hi!">Get
                                 In Touch &raquo;</a></p>
                     </div>
                 </div>
@@ -145,60 +140,25 @@
         </div>
 
         <div class="container">
-            <div class="container p-4 pr-section" id="java-div">
-                <h2 class="mb-2 monob">Cloud-Based Serverless Java Functions</h2>
-                <div class="row">
-                    <div class="col-md-2">
-                        <img class="img-rounded img-fluid mb-3 wb" src="images/java-logo.jpeg" alt="Java"
-                            title="Serverless Java Functions" />
-                    </div>
-                    <div class="col-md-10">
-                        <p class="lead mb-0"><strong>Java</strong> examples {coursework, code-challenges etc.} deployed
-                            as <strong>AWS Lambda</strong> functions.
-                        </p>
-                        <hr class="my-2">
-                        <p>A selection of Java functionality, from simple recursive factorials to dynamic calculations
-                            using memoisation and tabulation. These operate serverless as <strong>Amazon AWS
-                                Lambda</strong> functions
-                            accessible here via <strong>AWS API Gateway</strong> triggers. Functions are Maven packages
-                            deployed
-                            via the AWS CLi to an <strong>AWS CloudFormation Stack</strong>. Front end here is basic
-                            JQuery with some
-                            simple Javascript field validation.
-                        <p class="mb-0"><a class="btn btnp bkg-dark pr-col btn-lg mono" href="serverless-java.html"
-                                role="button" title="Serverless Java Functions">Try Them Out &raquo;</a></p>
+            <div class="container yd-m my-5" title="YeoDevs Mission">
+                <div class="row ">
+                    <div class="col">
+                        <blockquote class="blockquote mb-0">You're here at the inception of <strong>YeoDevs</strong>.
+                            What is it? Well, consider the role of the developer. Consider the sedentary nature of
+                            the work. Consider the long periods <em>of</em> work without breaks,
+                            and consider the stresses of the job. With those in mind, the need for breaks {even short
+                            ones} or nudges
+                            to stop, to take a walk, stretch or go do something else, to me at least, couldn't be more
+                            obvious. <strong>YeoDevs</strong> is proposed as both a quick tips blog for maintaining
+                            some WLB and also an app {iOS only right now} to nudge devs into taking breaks...
+                        </blockquote>
                     </div>
                 </div>
             </div>
-            <hr class="my-3">
         </div>
+        <hr class="my-5">
 
-        <div class="container">
-            <div class="container p-4 pr-section" id="ymal-div">
-                <h2 class="mb-2 monob">RESTful API-Driven Watch Next Movie Algorithm</h2>
-                <div class="row">
-                    <div class="col-md-2">
-                        <img class="img-rounded img-fluid mb-3 wb" src="images/ymal.png" alt="You May Also Like Website"
-                            title="Watch Next Movie Algorithm API" />
-                    </div>
-                    <div class="col-md-10">
-                        <p class="lead mb-0"><Strong>MySQL</Strong> Movie DB, <strong>API</strong>, and a Watch-Next
-                            Movie Algorithm Front End
-                        </p>
-                        <hr class="my-2">
-                        <p>A <strong>MySQL</strong> database holds a selection of movie information (in 3NF). A
-                            <strong>PHP</strong> API
-                            allows CRUD access through 19 different endpoints. In addition, the API supports a clever
-                            <strong>watch-next algorithm</strong> based an ingested 3x movie watch history. Basic
-                            <strong>JS / jQuery</strong> front
-                            end for demonstration of the API.
-                        <p class="mb-0"><a class="btn btnp bkg-dark pr-col btn-lg mono" href="ymal.html" role="button"
-                                title="Watch-Next Movie Algorithm">Check It Out &raquo;</a></p>
-                    </div>
-                </div>
-            </div>
-            <hr class="my-5">
-        </div>
+
 
     </main>
     <footer class="footer mt-auto py-3 bkg-dark">
