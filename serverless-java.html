@@ -106,6 +106,7 @@
                         .then(function (result) {
                             // Add success callback code here.
                             console.log(result);
+                            $("#cansum-response").css("display", "");
                             $("#cansum-response").text(result.resultString);
 
                         }).catch(function (result) {
