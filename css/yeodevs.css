@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@200;400&display=swap');
+.mono {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 200;
+}
+
+.monob {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 400;
+}
+
+.brandtitle {
+    font-size: 2rem;
+}
+
+.brandtitle:hover, .navbar-dark .navbar-nav .nav-link:hover {
+    color: #f8e8a7;
+    text-decoration: none;
+}
+
+.display-3 {
+    font-size: 3rem;
+}
+
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #ffde59;
+}
+
+body {
+    padding-top: 3.5rem;
+}
+
+.logo {
+    max-height: 2.5rem;
+    margin: 0px;
+    padding: 0px;
+}
+
+.bkg-dark {
+    background-color: #161927;
+}
+
+.pr-col {
+    color: #ffde59;
+}
+
+.se-col {
+    color: #2f8ff8;
+}
+
+.hc-col {
+    color: #355880;
+}
+
+.btnp:hover {
+    color: #ffde59;
+    background-color: #471430;
+    border-color: #471430;
+}
+
+.btnc:hover {
+    color: #ffde59;
+    background-color: #0f3257;
+    border-color: #0f3257;
+}
+
+.btni:hover {
+    color: #ffde59;
+    background-color: #644e1d;
+    border-color: #644e1d;
+}
+
+.sk-range {
+    color: rgb(27, 27, 24);
+    background-color: #ffde59;
+}
+
+.sk-range:hover {
+    background-color: #f7d035;
+}
+
+.ssk-range {
+    color: rgb(27, 27, 24);
+    background-color: #9bd5fc;
+    ;
+}
+
+.ssk-range:hover {
+    background-color: #89bee2;
+}
+
+.bkg-primary {
+    background-color: #ffde59;
+}
+
+.in-section, .pr-section {
+    padding-top: 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.in-section:hover {
+    background-color: #ffde59;
+}
+
+.pr-section:hover {
+    background-color: #fab9d4;
+}
+
+.jtin {
+    background-image: url("../images/pexels-markus-spiske-330771.jpg");
+    background-size: cover;
+}
+
+.jtcv {
+    background-image: url("../images/pexels-sabrina-gelbart-249798.jpg");
+    background-size: cover;
+}
+
+.jtpr {
+    background-image: url("../images/prj.png");
+    background-size: cover;
+}
+
+.section-img {
+    height: 15rem;
+    background-size: cover;
+    border-radius: 10px;
+    border: 5px solid #fff;
+    box-shadow: 10px 10px 17px -2px rgba(0, 0, 0, 0.25);
+}
+
+#pr-section {
+    background-image: url("../images/cookie-the-pom-siNDDi9RpVY-unsplash.jpg");
+}
+
+#cv-section {
+    background-image: url("../images/bull-terrier-at-computer.jpeg");
+}
+
+#yd-section {
+    background-image: url("../images/chimp-at-computer.jpeg");
+}
+
+.img-rounded {
+    border-radius: 10px;
+    box-shadow: 10px 10px 17px -2px rgba(0, 0, 0, 0.75);
+    max-width: 100%;
+}
+
+.wb {
+    border: 5px solid #fff;
+}
+
+.ps-m {
+    background-color: #d0e0f7;
+    border-radius: 10px;
+    border: 5px solid #fff;
+    box-shadow: 10px 10px 17px -2px rgba(0, 0, 0, 0.1);
+    padding: 3rem;
+}
+
+.ps-m:hover {
+    background-color: #b6cae7;
+}
+
+.psection {
+    background-color: #f7d0dd;
+    border-radius: 10px;
+    border: 5px solid #fcf1f4;
+    box-shadow: 10px 10px 17px -2px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+}
+
+.pform-section {
+    border-radius: 10px;
+    border: 5px solid #f7d0dd;
+    box-shadow: 10px 10px 17px -2px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+}
+
+.pform-section:hover {
+    background-color: #f7d0dd;
+    border-radius: 10px;
+    border: 5px solid #fff;
+    box-shadow: 10px 10px 17px -2px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+}
+
+.form-control:focus {
+    border: 3px solid;
+    border-color: #f89fbd;
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(255, 100, 255, 0.5);
+}
+
+.response {
+    color: #f8296e;
+}
+
+.carousel-inner {
+    border-radius: 10px;
+    box-shadow: 10px 10px 17px -2px rgba(0, 0, 0, 0.75);
+}
+
+.carousel-indicators>li {
+    background-color: #f89fbd;
+}
+
+.carousel-indicators .active {
+    background-color: #f8296e;
+}
+
+.carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23f89fbd' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
+}
+
+.carousel-control-next-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23f89fbd' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
+}
