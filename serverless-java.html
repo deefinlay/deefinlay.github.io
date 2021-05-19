@@ -83,8 +83,10 @@
                         var body = {
                             // This is where you define the body of the request,
                             //"InputText": ttext.value
-                            'target': target,
-                            'nums': numStringNoSpaces
+                            data: {
+                                'target': target,
+                                'nums': numStringNoSpaces
+                            }
                         };
 
                         var additionalParams = {
