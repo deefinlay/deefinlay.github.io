@@ -19,6 +19,18 @@
         crossorigin="anonymous"></script>
 
 
+    <script type="text/javascript" src="lib/axios/dist/axios.standalone.js"></script>
+    <script type="text/javascript" src="lib/CryptoJS/rollups/hmac-sha256.js"></script>
+    <script type="text/javascript" src="lib/CryptoJS/rollups/sha256.js"></script>
+    <script type="text/javascript" src="lib/CryptoJS/components/hmac.js"></script>
+    <script type="text/javascript" src="lib/CryptoJS/components/enc-base64.js"></script>
+    <script type="text/javascript" src="lib/url-template/url-template.js"></script>
+    <script type="text/javascript" src="lib/apiGatewayCore/sigV4Client.js"></script>
+    <script type="text/javascript" src="lib/apiGatewayCore/apiGatewayClient.js"></script>
+    <script type="text/javascript" src="lib/apiGatewayCore/simpleHttpClient.js"></script>
+    <script type="text/javascript" src="lib/apiGatewayCore/utils.js"></script>
+    <script type="text/javascript" src="apigClient.js"></script>
+
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -54,30 +66,74 @@
                 } else if ($("#cansum-numbers").val() == "" || !csvRegex.test($("#cansum-numbers").val())) {
                     focusRevealRespond("#cansum-numbers", "#cansum-response", "Enter a Number List (Comma Separated)");
                 } else {
-                    var target = $("#cansum-target").val();
-                    var numString = $("#cansum-numbers").val();
-                    var numStringNoSpaces = "[" + numString.replace(/\s/g, '') + "]";
+                    {
+                        var apigClient = apigClientFactory.newClient({
+                            //apiKey: ''
+                        });
+                        var params = {
+                            // This is where any modeled request parameters should be added.
+                            // The key is the parameter name, as it is defined in the API in API Gateway.
+                            //param0: '',
+                            //param1: ''
+                        };
 
-                    console.log(numStringNoSpaces);
-
-
-                    request = $.ajax({ // API call to Lambda
-                        crossOrigin: true,
-                        type: "POST",
-                        contentType: "application/json;charset=UTF-8",
-                        'Access-Control-Allow-Origin': "*",
-                        dataType: 'JSON',
-                        crossDomain: true, // tell browser to allow cross domain
-                        url: "https://kr715nh4k4.execute-api.eu-west-1.amazonaws.com/default/YoWorldJava",
-                        data: {
+                        var body = {
+                            // This is where you define the body of the request,
+                            //"InputText": ttext.value
                             'target': target,
                             'nums': numStringNoSpaces
-                        },
-                        success: function (result) {
-                            var msg = result.resultString;
-                            console.log("return is " + msg);
-                        }
-                    });
+                        };
+
+                        var additionalParams = {
+                            // If there are any unmodeled query parameters or headers that must be
+                            //   sent with the request, add them here.
+                            headers: {
+                                //param0: '',
+                                //param1: ''
+                            },
+                            queryParams: {
+                                //param0: '',
+                                //param1: ''
+                            }
+                        };
+
+                        apigClient.yoWorldJavaPost(params, body, additionalParams)
+                            .then(function (result) {
+                                // Add success callback code here.
+                                console.log(result);
+                                var obj = result.data.apiResult;
+                                document.getElementById("tresult").innerHTML = obj;
+                            }).catch(function (result) {
+                                // Add error callback code here.
+                                console.log(result);
+                            })
+                    }
+
+
+                    // var target = $("#cansum-target").val();
+                    // var numString = $("#cansum-numbers").val();
+                    // var numStringNoSpaces = "[" + numString.replace(/\s/g, '') + "]";
+
+                    // console.log(numStringNoSpaces);
+
+
+                    // request = $.ajax({ // API call to Lambda
+                    //     crossOrigin: true,
+                    //     type: "POST",
+                    //     contentType: "application/json;charset=UTF-8",
+                    //     'Access-Control-Allow-Origin': "*",
+                    //     dataType: 'JSON',
+                    //     crossDomain: true, // tell browser to allow cross domain
+                    //     url: "https://kr715nh4k4.execute-api.eu-west-1.amazonaws.com/default/YoWorldJava",
+                    //     data: {
+                    //         'target': target,
+                    //         'nums': numStringNoSpaces
+                    //     },
+                    //     success: function (result) {
+                    //         var msg = result.resultString;
+                    //         console.log("return is " + msg);
+                    //     }
+                    // });
 
                 }
             });
@@ -107,7 +163,7 @@
             $(document).attr("title", ownedBy + " · Serverless Java");
             $("#img1").attr("src", gistURL + "/6313f6d97c332f33bc44cff5ca2fabc9.js");
 
-    });
+        });
     </script>
 
 </head>
@@ -223,7 +279,7 @@
                             from the exponential O(2<sup>n</sup>) down to a mere linear O(n) !!
                         </p>
                         <script src="https://gist.github.com/deefinlay/6313f6d97c332f33bc44cff5ca2fabc9.js"
-                        id="img1"></script>
+                            id="img1"></script>
 
                         <p class="lead mb-0">
                             Step 2. Deserialising Input Received through the API Endpoint
