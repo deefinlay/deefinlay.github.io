@@ -68,19 +68,17 @@
                 } else {
                     var target = $("#cansum-target").val();
                     var numString = $("#cansum-numbers").val();
-                    var numStringNoSpaces =  numString.replace(/\s/g, '');
+                    var numStringNoSpaces = numString.replace(/\s/g, '');
                     var nums = numStringNoSpaces.split(",");
 
                     var apigClient = apigClientFactory.newClient({
                         //apiKey: ''
                     });
                     var params = {
-                        // This is where any modeled request parameters should be added.
+                        // This is where any modelled request parameters should be added.
                         // The key is the parameter name, as it is defined in the API in API Gateway.
                         //param0: '',
                         //param1: ''
-                        // 'target': target,
-                        // 'nums': numStringNoSpaces
                     };
 
                     var body = {
@@ -106,41 +104,14 @@
                     apigClient.yoWorldJavaPost(params, body, additionalParams)
                         .then(function (result) {
                             // Add success callback code here.
-                            console.log(result);
                             var response = result.data.queryString + "<br/>" + result.data.resultString;
                             $("#cansum-response").css("display", "");
                             $("#cansum-response").html(response);
-
+                            $(document).scrollTop($("#cansum-form").offset().top);
                         }).catch(function (result) {
                             // Add error callback code here.
                             console.log(result);
                         })
-
-
-
-
-
-                    // console.log(numStringNoSpaces);
-
-
-                    // request = $.ajax({ // API call to Lambda
-                    //     crossOrigin: true,
-                    //     type: "POST",
-                    //     contentType: "application/json;charset=UTF-8",
-                    //     'Access-Control-Allow-Origin': "*",
-                    //     dataType: 'JSON',
-                    //     crossDomain: true, // tell browser to allow cross domain
-                    //     url: "https://kr715nh4k4.execute-api.eu-west-1.amazonaws.com/default/YoWorldJava",
-                    //     data: {
-                    //         'target': target,
-                    //         'nums': numStringNoSpaces
-                    //     },
-                    //     success: function (result) {
-                    //         var msg = result.resultString;
-                    //         console.log("return is " + msg);
-                    //     }
-                    // });
-
                 }
             });
 
@@ -167,7 +138,14 @@
             var ownedBy = "yalniF eeD".split("").reverse().join("");
             $("#foot-name").text(ownedBy);
             $(document).attr("title", ownedBy + " · Serverless Java");
-            $("#img1").attr("src", gistURL + "/6313f6d97c332f33bc44cff5ca2fabc9.js");
+
+            // scroll to top button
+            $('#toTopBtn').click(function () {
+                $("html, body").animate({
+                    scrollTop: 0
+                }, 1000);
+                return false;
+            });
 
         });
     </script>
@@ -231,7 +209,7 @@
     </nav>
 
     <main role="main">
-
+        <a href="#" id="toTopBtn" class="cd-top text-replace" data-abc="true"></a>
         <!-- Main jumbotron for a primary marketing message or call to action -->
         <div class="jumbotron jtpr">
             <div class="container">
@@ -242,9 +220,8 @@
                     </div>
                     <div class="col-md-9">
                         <h1 class="display-3 mb-0 mono">Server-less Java</h1>
-                        <p class="lead mb-0">Java as <strong>cloud-deployed AWS Lambda Functions</strong> operating from
-                            here through the <strong>AWS API
-                                Gateway</strong>.
+                        <p class="lead mb-0">Java as <strong>cloud-deployed AWS Lambda Functions</strong> operating
+                            through the <strong>AWS API Gateway</strong>.
                         </p>
                         <hr class="my-2">
                         <p>Simple, interactive Java examples collected over the last 10 months or so...
@@ -266,72 +243,149 @@
         </div>
 
         <div class="container">
-            <div class="row" id="cansum">
-                <div class="col-md-9 d-flex flex-column">
-                    <div class="psection" id="cansum-story">
-                        <h2 class="monob">Story</h2>
-                        <p>
-                            Given a target number t, is it possible to make t as a combination sum from a list of
-                            numbers
-                            [x<sub>1</sub>..x<sub>n</sub>]?
-                        </p>
-                        <h2 class="monob">Solve</h2>
-                        <p class="lead mb-0">
-                            Step 1. The Method
-                        </p>
-                        <hr class="my-2">
-                        <p>
-                            Using memoisation as a cache of already calculated values decreases the time complexity
-                            from the exponential O(2<sup>n</sup>) down to a mere linear O(n) !!
-                        </p>
-                        <script src="https://gist.github.com/deefinlay/6313f6d97c332f33bc44cff5ca2fabc9.js"
-                            id="img1"></script>
-
-                        <p class="lead mb-0">
-                            Step 2. Deserialising Input Received through the API Endpoint
-                        </p>
-                        <hr class="my-2">
-                        <p>
-                            A simple class that deserialises the JSON input into component parts, here, it's simply the
-                            target number t and the list of numbers to sum to that target...
-                        </p>
-                        <script src="https://gist.github.com/deefinlay/fb34ab53c0b7c65bb6fb23dbdd3387c8.js"
-                            id="img2"></script>
-                        <p class="lead mb-0">
-                            Step 3. Deploy to AWS Lambda
-                        </p>
-                        <hr class="my-2">
-                        <p>
-                            The above class <code>CanSumInput</code> acts as the input to a handler class. The handler
-                            class
-                            is packaged along with a CloudFormation Stack presented as a .yaml file into a JAR. This
-                            comprises the AWS Lambda function which is triggered through the API Gateway which expects
-                            corresponsing parameters to the CanSumInput class.
-                        </p>
+            <div class="container psection my-5" title="Menu">
+                <div class="row ">
+                    <div class="col-md-4">
+                        <h2 class="monob">Contents...</h2>
+                        <div class="list-group">
+                            <a href="#deploy" class="list-group-item list-group-item-action">Java Prep / Deploy to AWS</a>
+                            <a href="#cansum" class="list-group-item list-group-item-action"><strong>Function</strong>:
+                                Can Sum? {Memoised}</a>
+                            <a href="#" class="list-group-item list-group-item-action"><strong>Function</strong>: How
+                                Sum? {Memoised}</a>
+                            <a href="#" class="list-group-item list-group-item-action"><strong>Function</strong>:
+                                Fibonacci {Tabular}</a>
+                            <a href="#" class="list-group-item list-group-item-action"><strong>Function</strong>:
+                                Factorial {Memoised}</a>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-3 d-flex flex-column">
-                    <div class="pform-section" id="cansum-form">
-                        <h2 class="monob">Implement</h2>
+            </div>
+        </div>
 
-                        <form>
-                            <div class="form-group">
-                                <label for="cansum-target">Target number</label>
-                                <input class="form-control" id="cansum-target" placeholder="Target Number">
-                            </div>
-                            <div class="form-group">
-                                <label for="cansum-numbers" class="mb-0">Numbers List</label>
-                                <small id="cansum-numbers-help" class="form-text text-muted mt-0 mb-2">The list of
-                                    numbers from which to make the target sum, eg. 2, 4, 7 (use comma
-                                    separators)</small>
-                                <input class="form-control" id="cansum-numbers" aria-describedby="cansum-numbers-help"
-                                    placeholder="List of numbers">
-                            </div>
-                            <div class="response mb-3" id="cansum-response"><label></label></div>
-                            <div class="mt-auto"><a class="btn btnp btn-secondary" id="cansum-button" href="#"
-                                    role="button">Go &raquo;</a></div>
-                        </form>
+        <div class="container anchorPoint" id="deploy">
+            <div class="container psection my-5" title="Deployment on AWS">
+                <div class="row ">
+                    <div class="col">
+                        <blockquote class="blockquote mb-0 p-3">
+                            <h2 class="monob">Preparing the Java Function</h2>
+                            <hr class="my-2">
+                            <p>
+                                <strong>I'm simplifying here for space</strong> but in essence, each Java function
+                                in the below list becomes a handler for the receipt of
+                                input data to the AWS Lambda. In each instance I have created an input class that
+                                deserialises the input {for example, into an int along with an array of ints} as below
+                            </p>
+                            <script src="https://gist.github.com/deefinlay/fb34ab53c0b7c65bb6fb23dbdd3387c8.js"
+                                id="img2"></script>
+                            <p>
+                                That data is processed by the Java function and the result converted to JSON return
+                                which is picked up by the front end here.
+                            </p>
+                            <h2 class="monob">Deployment on AWS</h2>
+                            <hr class="my-2">
+                            <p>
+                                <strong>In brief</strong>, the Java handler class
+                                is packaged in Maven along with a CloudFormation Stack presented as a .yaml file into a
+                                JAR. This
+                                comprises the AWS Lambda function which is triggered through the API Gateway which
+                                expects
+                                corresponsing parameters to the input class via the handler.
+                            </p>
+                            <p>
+                                I'm also using the <strong>AWS Serverless Application Model</strong> {SAM} to upload the
+                                stack using the AWS CLI.
+                            </p>
+                            <p>
+                                To simplify front end connection to the API endpoint, API Gateway also provides an
+                                <strong>SDK</strong>. Simply choose
+                                your platform as below - I'm using Javascript for my API call here.
+                            </p>
+                            <img src="images/aws-sdk.png" class="img-rounded w-100">
+                            <p class="mt-4">
+                                Just pop the resulting apigClient.js script and lib folder at the same level as this
+                                calling
+                                page in your directory structure. Remember to include apigClient.js in the calling
+                                script too!
+                            </p>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <div class="container anchorPoint" id="cansum">
+            <div class="container my-5 px-0">
+                <div class="row">
+                    <div class="col-md-9 d-flex flex-column">
+                        <div class="psection" id="cansum-story">
+                            <h2 class="monob">Story</h2>
+                            <p>
+                                Given a target number t, is it possible to make t as a combination sum from a list of
+                                numbers
+                                [x<sub>1</sub>..x<sub>n</sub>]?
+                            </p>
+                            <h2 class="monob">Solve</h2>
+                            <p class="lead mb-0">
+                                Step 1. The Method
+                            </p>
+                            <hr class="my-2">
+                            <p>
+                                Using memoisation as a cache of already calculated values decreases the time complexity
+                                from the exponential O(2<sup>n</sup>) down to a mere linear O(n) !!
+                            </p>
+                            <script src="https://gist.github.com/deefinlay/6313f6d97c332f33bc44cff5ca2fabc9.js"
+                                id="img1"></script>
+
+                            <p class="lead mb-0">
+                                Step 2. Deserialising Input Received through the API Endpoint
+                            </p>
+                            <hr class="my-2">
+                            <p>
+                                A simple class that deserialises the JSON input into component parts, here, it's simply
+                                the
+                                target number t and the list of numbers to sum to that target...
+                            </p>
+                            <script src="https://gist.github.com/deefinlay/fb34ab53c0b7c65bb6fb23dbdd3387c8.js"
+                                id="img2"></script>
+                            <p class="lead mb-0">
+                                Step 3. Deploy to AWS Lambda
+                            </p>
+                            <hr class="my-2">
+                            <p>
+                                The above class <code>CanSumInput</code> acts as the input to a handler class. The
+                                handler
+                                class
+                                is packaged along with a CloudFormation Stack presented as a .yaml file into a JAR. This
+                                comprises the AWS Lambda function which is triggered through the API Gateway which
+                                expects
+                                corresponsing parameters to the CanSumInput class.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 d-flex flex-column">
+                        <div class="pform-section" id="cansum-form">
+                            <h2 class="monob">Implement</h2>
+
+                            <form>
+                                <div class="form-group">
+                                    <label for="cansum-target">Target number</label>
+                                    <input class="form-control" id="cansum-target" placeholder="Target Number">
+                                </div>
+                                <div class="form-group">
+                                    <label for="cansum-numbers" class="mb-0">Numbers List</label>
+                                    <small id="cansum-numbers-help" class="form-text text-muted mt-0 mb-2">The list of
+                                        numbers from which to make the target sum, eg. 2, 4, 7 (use comma
+                                        separators)</small>
+                                    <input class="form-control" id="cansum-numbers"
+                                        aria-describedby="cansum-numbers-help" placeholder="List of numbers">
+                                </div>
+                                <div class="response mb-3" id="cansum-response"><label></label></div>
+                                <div class="mt-auto"><a class="btn btnp btn-secondary" id="cansum-button" href="#"
+                                        role="button">Go &raquo;</a></div>
+                            </form>
+
+                        </div>
                     </div>
                 </div>
             </div>
