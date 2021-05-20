@@ -242,3 +242,34 @@ body {
 .carousel-control-next-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23f89fbd' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
 }
+
+.list-group-item:hover{
+    background-color: #faecf1;
+}
+
+.anchorPoint{
+    padding-top: 50px;
+    margin-top: -50px;
+}
+
+/* scroll button */
+#toTopBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 98;
+    padding: 21px;
+    background-color: #f89fbdc5;
+    border-radius: 10px;
+}
+
+.cd-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .05) !important;
+    background: url(https://res.cloudinary.com/dxfq3iotg/image/upload/v1571057658/cd-top-arrow.svg) no-repeat center 50%;
+}
