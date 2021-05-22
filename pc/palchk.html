@@ -60,9 +60,7 @@
                 var csvRegex = /^(\d+)(,\s*\d+\s*)*$/;
 
                 if ($("#palcheck-target").val() == "") {
-                    focusRevealRespond("#palcheck-target", "#palcheck-response", "Enter a Target");
-                } else if (!$.isNumeric($("#palcheck-target").val()) || Math.floor($("#palcheck-target").val()) != $("#palcheck-target").val()) {
-                    focusRevealRespond("#palcheck-target", "#palcheck-response", "Enter a (Whole) Number");
+                    focusRevealRespond("#palcheck-target", "#palcheck-response", "Enter a Word or Phrase");
                 } else {
                     var target = $("#palcheck-target").val();
 
@@ -96,7 +94,7 @@
                         }
                     };
 
-                    apigClient.palcheckLambdaJavaPost(params, body, additionalParams)
+                    apigClient.palCheckLambdaJavaPost(params, body, additionalParams)
                         .then(function (result) {
                             // Add success callback code here.
                             var response = result.data.queryString + "<br/>" + result.data.resultString + "<br />Time Taken: " + result.data.timeTaken + "ms";
@@ -280,9 +278,7 @@
                                 nature, it's not the fastest implementation! A quicker way would be to compare characters
                                 at either end, moving towards the centre. 
                             </p>
-
-                            <script
-                                src="https://gist.github.com/deefinlay/acfbaa1df7ce1201cac1d30fef9a61fa.js"></script>
+                            <script src="https://gist.github.com/deefinlay/dee69c3f0aa78bc444be39740418612e.js"></script>
                         </div>
                     </div>
                     <div class="col-md-3 d-flex flex-column">
@@ -292,7 +288,7 @@
                             <form>
                                 <div class="form-group">
                                     <label for="palcheck-target">String to check</label>
-                                    <input class="form-control" id="palcheck-target" placeholder="Target Number">
+                                    <input class="form-control" id="palcheck-target" placeholder="Target Word / Phrase">
                                 </div>
 
                                 <div class="response mb-3" id="palcheck-response"><label></label></div>
