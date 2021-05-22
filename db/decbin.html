@@ -18,6 +18,19 @@
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
         crossorigin="anonymous"></script>
 
+
+    <script type="text/javascript" src="lib/axios/dist/axios.standalone.js"></script>
+    <script type="text/javascript" src="lib/CryptoJS/rollups/hmac-sha256.js"></script>
+    <script type="text/javascript" src="lib/CryptoJS/rollups/sha256.js"></script>
+    <script type="text/javascript" src="lib/CryptoJS/components/hmac.js"></script>
+    <script type="text/javascript" src="lib/CryptoJS/components/enc-base64.js"></script>
+    <script type="text/javascript" src="lib/url-template/url-template.js"></script>
+    <script type="text/javascript" src="lib/apiGatewayCore/sigV4Client.js"></script>
+    <script type="text/javascript" src="lib/apiGatewayCore/apiGatewayClient.js"></script>
+    <script type="text/javascript" src="lib/apiGatewayCore/simpleHttpClient.js"></script>
+    <script type="text/javascript" src="lib/apiGatewayCore/utils.js"></script>
+    <script type="text/javascript" src="apigClient.js"></script>
+
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -35,16 +48,77 @@
         }
     </style>
     <!-- Custom styles for this template -->
-    <link href="css/yeodevs.css" rel="stylesheet">
+    <link href="../css/yeodevs.css" rel="stylesheet">
 
     <script>
         $(function () {
 
-            $("#cansum-button").click(function () {
+            hideResponsesSections();
 
+            $("#decbin-button").click(function () {
+
+                var csvRegex = /^(\d+)(,\s*\d+\s*)*$/;
+
+                if ($("#decbin-target").val() == "") {
+                    focusRevealRespond("#decbin-target", "#decbin-response", "Enter a Target");
+                } else if (!$.isNumeric($("#decbin-target").val()) || Math.floor($("#decbin-target").val()) != $("#decbin-target").val()) {
+                    focusRevealRespond("#decbin-target", "#decbin-response", "Enter a (Whole) Number");
+                } else {
+                    var target = $("#decbin-target").val();
+
+                    var apigClient = apigClientFactory.newClient({
+                        //apiKey: ''
+                    });
+                    var params = {
+                        // This is where any modelled request parameters should be added.
+                        // The key is the parameter name, as it is defined in the API in API Gateway.
+                        //param0: '',
+                        //param1: ''
+                    };
+
+                    var body = {
+                        // This is where you define the body of the request,
+                        //"InputText": ttext.value
+                        'target': target
+
+                    };
+
+                    var additionalParams = {
+                        // If there are any unmodeled query parameters or headers that must be
+                        //   sent with the request, add them here.
+                        headers: {
+                            //param0: '',
+                            //param1: ''
+                        },
+                        queryParams: {
+                            //param0: '',
+                            //param1: ''
+                        }
+                    };
+
+                    apigClient.decBinLambdaJavaPost(params, body, additionalParams)
+                        .then(function (result) {
+                            // Add success callback code here.
+                            var response = result.data.queryString + "<br/>" + result.data.resultString + "<br />Time Taken: " + result.data.timeTaken + "ms";
+                            $("#decbin-response").css("display", "");
+                            $("#decbin-response").html(response);
+                            $(document).scrollTop($("#decbin-form").offset().top);
+                        }).catch(function (result) {
+                            // Add error callback code here.
+                            console.log(result);
+                        })
+                }
             });
 
+            function focusRevealRespond(inputField, responseField, response) {
+                $(inputField).focus();
+                $(responseField).css("display", "");
+                $(responseField).text(response);
+            }
 
+            function hideResponsesSections() {
+                $(".response").css("display", "none");
+            }
 
             // anti-spam precautions
             var gitSite = "https://github.com/";
@@ -58,7 +132,7 @@
             $("#git-link").attr("href", gitURL);
             var ownedBy = "yalniF eeD".split("").reverse().join("");
             $("#foot-name").text(ownedBy);
-            $(document).attr("title", ownedBy + " · Serverless Java");
+            $(document).attr("title", ownedBy + " · Java Dec to Bin");
 
             // scroll to top button
             $('#toTopBtn').click(function () {
@@ -76,7 +150,7 @@
 <body>
 
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bkg-dark">
-        <a class="mono brandtitle pr-col" href="index.html">{YeoDevs}</a>
+        <a class="mono brandtitle pr-col" href="../index.html">{YeoDevs}</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
             aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -85,13 +159,13 @@
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link mono" href="projects.html">&laquo;Projects</a>
+                    <a class="nav-link mono" href="../projects.html">&laquo;Projects</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mono" href="yeodevs.html">Dev Wellbeing</a>
+                    <a class="nav-link mono" href="../yeodevs.html">Dev Wellbeing</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mono" href="cv-resume.html">CV|Resume</a>
+                    <a class="nav-link mono" href="../cv-resume.html">CV|Resume</a>
                 </li>
             </ul>
 
@@ -136,11 +210,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">
-                        <img class="img-rounded img-fluid" src="images/java-logo.jpeg" alt="Java"
+                        <img class="img-rounded img-fluid" src="../images/java-logo.jpeg" alt="Java"
                             title="Serverless Java Functions" />
                     </div>
                     <div class="col-md-9">
-                        <h1 class="display-3 mb-0 mono">Server-less Java</h1>
+                        <h1 class="display-3 mb-0 mono">Server-less Java : Dec > Bin</h1>
                         <p class="lead mb-0">Java as <strong>cloud-deployed AWS Lambda Functions</strong> operating
                             through the <strong>AWS API Gateway</strong>.
                         </p>
@@ -151,9 +225,6 @@
                             <p class="mb-0 ml-3 mr-5 mt-3"><a class="btn btnp bkg-dark pr-col btn-lg mono linked-link"
                                     href="" role="button" title="Always Happy to Say Hi!">Get
                                     In Touch &raquo;</a></p>
-                            <p class="mb-0 ml-3 mr-5 mt-3"><a class="btn btnp bkg-dark pr-col btn-lg mono"
-                                    href="projects.html" role="button" title="Back to Projects Page">Back to Projects
-                                    &raquo;</a></p>
                         </div>
 
 
@@ -169,75 +240,73 @@
                     <div class="col-md-4">
                         <h2 class="monob">Menu...</h2>
                         <div class="list-group">
-                            <a href="#deploy" class="list-group-item list-group-item-action">Java Prep / Deploy to
-                                AWS</a>
-                            <a href="cs/cansum.html" class="list-group-item list-group-item-action"><strong>Function</strong>:
+                            <a href="../serverless-java.html#deploy" class="list-group-item list-group-item-action">Java
+                                Prep / Deploy to AWS</a>
+                            <a href="../cs/cansum.html"
+                                class="list-group-item list-group-item-action"><strong>Function</strong>:
                                 Can Sum? {Memoised}</a>
-                            <a href="hs/howsum.html" class="list-group-item list-group-item-action"><strong>Function</strong>: How
-                                Sum? {Memoised}</a>
-                            <a href="db/decbin.html" class="list-group-item list-group-item-action"><strong>Function</strong>:
+                            <a href="../db/decbin.html"
+                                class="list-group-item list-group-item-action"><strong>Function</strong>:
+                                How Sum? {Memoised}</a>
+                            <a href="#" class="list-group-item list-group-item-action active"><strong>Function</strong>:
                                 Decimal to Binary Conversion</a>
-                                <a href="../pc/palchk.html" class="list-group-item list-group-item-action"><strong>Function</strong>:
-                                    Palindrome Check</a>
+                            <a href="../pc/palchk.html" class="list-group-item list-group-item-action"><strong>Function</strong>:
+                                Palindrome Check</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="container anchorPoint" id="deploy">
-            <div class="container psection my-5" title="Deployment on AWS">
-                <div class="row ">
-                    <div class="col">
-                        <blockquote class="blockquote mb-0 p-3">
-                            <h2 class="monob">Preparing the Java Function</h2>
+
+
+        <div class="container anchorPoint" id="decbin">
+            <div class="container px-0">
+                <div class="row">
+                    <div class="col-md-9 d-flex flex-column">
+                        <div class="psection" id="decbin-story">
+                            <h2 class="monob">Problem</h2>
+                            <p>
+                                Convert a decimal number to a binary value
+                            </p>
+                            <h2 class="monob">Solve</h2>
+                            <p class="lead mb-0">
+                                Step 1. The Method
+                            </p>
                             <hr class="my-2">
                             <p>
-                                <strong>I'm simplifying here for space</strong> but in essence, each Java function
-                                here becomes a handler for the receipt of
-                                input data to the AWS Lambda. In each instance I have created an input class that
-                                deserialises the JSON input {eg. into an int along with an array of ints} as below
+                                Progressively add the result of a mod2 operation to a StringBuilder, then reverse the
+                                StringBuilder.
+                                StringBuilder for this will have a O(n) complexity where n is the number of binary
+                                digits appended to the StringBuilder.
                             </p>
-                            <script src="https://gist.github.com/deefinlay/fb34ab53c0b7c65bb6fb23dbdd3387c8.js"
-                                id="img2"></script>
-                            <p>
-                                That data is processed by the Java function and the result converted to JSON return
-                                which is picked up by the front end here.
-                            </p>
-                            <h2 class="monob">Deployment on AWS</h2>
-                            <hr class="my-2">
-                            <p>
-                                <strong>In brief</strong>, the Java handler class
-                                is packaged in Maven along with a CloudFormation Stack presented as a .yaml file into a
-                                JAR. This
-                                comprises the AWS Lambda function which is triggered through the API Gateway which
-                                expects
-                                corresponsing parameters to the input class via the handler.
-                            </p>
-                            <p>
-                                I'm also using the <strong>AWS Serverless Application Model</strong> {SAM} to upload the
-                                stack using the AWS CLI.
-                            </p>
-                            <p>
-                                To simplify front end connection to the API endpoint, API Gateway also provides an
-                                <strong>SDK</strong>. Simply choose
-                                your platform as below - I'm using Javascript for my API call here.
-                            </p>
-                            <img src="images/aws-sdk.png" class="img-rounded w-100">
-                            <p class="mt-4">
-                                Just pop the resulting apigClient.js script and lib folder at the same level as this
-                                calling
-                                page in your directory structure. Remember to include apigClient.js in the calling
-                                script too!
-                            </p>
-                        </blockquote>
+
+                            <script
+                                src="https://gist.github.com/deefinlay/acfbaa1df7ce1201cac1d30fef9a61fa.js"></script>
+                        </div>
+                    </div>
+                    <div class="col-md-3 d-flex flex-column">
+                        <div class="pform-section" id="decbin-form">
+                            <h2 class="monob">Implement</h2>
+
+                            <form>
+                                <div class="form-group">
+                                    <label for="decbin-target">Decimal to convert</label>
+                                    <input class="form-control" id="decbin-target" placeholder="Target Number">
+                                </div>
+
+                                <div class="response mb-3" id="decbin-response"><label></label></div>
+                                <div class="mt-auto"><a class="btn btnp btn-secondary" id="decbin-button" href="#"
+                                        role="button">Go &raquo;</a></div>
+                            </form>
+
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
         <hr class="my-5">
+        </div>
 
 
 

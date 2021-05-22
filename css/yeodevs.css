@@ -231,6 +231,11 @@ body {
     background-color: #f89fbd;
 }
 
+.list-group-item-action.active, .list-group-item-action.active:hover {
+    background-color: #f89fbd;
+    border-color: #f89fbd;
+}
+
 .carousel-indicators .active {
     background-color: #f8296e;
 }
